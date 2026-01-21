@@ -85,25 +85,6 @@ export const HeroSection: React.FC = () => {
           <span className="text-primary font-semibold">Production-Ready</span>
         </p>
 
-        {/* Stats */}
-        <div 
-          className="flex flex-wrap justify-center gap-8 mb-10 animate-fade-up"
-          style={{ animationDelay: '0.5s' }}
-        >
-          {[
-            { value: '12+', label: 'Setup Steps' },
-            { value: '50+', label: 'Commands' },
-            { value: '24/7', label: 'Access' },
-          ].map((stat, i) => (
-            <div key={i} className="text-center">
-              <div className="text-2xl md:text-3xl font-mono font-bold text-primary neon-text">
-                {stat.value}
-              </div>
-              <div className="text-sm text-muted-foreground">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-
         {/* CTA Buttons */}
         <div 
           className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up"
@@ -125,18 +106,7 @@ export const HeroSection: React.FC = () => {
           </button>
         </div>
 
-        {/* Scroll Indicator */}
-        <div 
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
-          style={{ animationDelay: '1s' }}
-        >
-          <button
-            onClick={() => scrollToSection('disclaimer')}
-            className="p-2 rounded-full border border-primary/30 hover:border-primary transition-colors"
-          >
-            <ArrowDown size={24} className="text-primary" />
-          </button>
-        </div>
+        
       </div>
 
       {/* Scan Lines Effect */}
