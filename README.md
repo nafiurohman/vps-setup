@@ -210,7 +210,7 @@ Project ini menggunakan MIT License. Lihat file `LICENSE` untuk detail.
 
 ## 🔗 **Links**
 
-- **Live Demo**: [VPS Setup Guide](https://nafiurohman.pages.dev/webikin/vps-setup)
+- **Live Demo**: [VPS Setup Guide](https://vps-setup.bezn.web.id)
 - **Documentation**: Tersedia di website
 - **Support**: Kontak melalui WhatsApp atau email
 
