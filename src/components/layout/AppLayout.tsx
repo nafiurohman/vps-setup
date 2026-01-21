@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { 
   Server, Home, Settings, Database, Globe, Container, Wrench, 
@@ -28,11 +28,14 @@ const menuItems = [
 
 export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [sidebarWidth, setSidebarWidth] = useState(256);
+  const [isResizing, setIsResizing] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [scrollProgress, setScrollProgress] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
+  const resizeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,6 +52,38 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
+  // Handle sidebar resizing
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsResizing(true);
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isResizing) return;
+      const newWidth = Math.max(200, Math.min(400, e.clientX));
+      setSidebarWidth(newWidth);
+    };
+
+    const handleMouseUp = () => {
+      setIsResizing(false);
+    };
+
+    if (isResizing) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+      document.body.style.cursor = 'col-resize';
+      document.body.style.userSelect = 'none';
+    }
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+    };
+  }, [isResizing]);
+
   const handleNavigation = (path: string) => {
     navigate(path);
     setMobileMenuOpen(false);
@@ -64,9 +99,14 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
       {/* Sidebar - Desktop */}
       <aside
         className={cn(
-          "hidden lg:flex flex-col h-screen sticky top-0 border-r border-border bg-card/50 backdrop-blur-sm transition-all duration-300 z-40",
-          sidebarCollapsed ? "w-16" : "w-64"
+          "hidden lg:flex flex-col h-screen fixed top-0 left-0 border-r border-border bg-card/50 backdrop-blur-sm transition-all duration-300 z-40",
+          sidebarCollapsed ? "w-16" : ""
         )}
+        style={{
+          width: sidebarCollapsed ? '64px' : `${sidebarWidth}px`,
+          minWidth: sidebarCollapsed ? '64px' : '200px',
+          maxWidth: sidebarCollapsed ? '64px' : '400px'
+        }}
       >
         {/* Logo */}
         <div className="h-16 flex items-center justify-between px-4 border-b border-border">
@@ -148,13 +188,35 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
         {/* Footer */}
         {!sidebarCollapsed && (
           <div className="p-3 border-t border-border">
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <BookOpen size={14} />
-              <span>by <a href="https://nafiurohman.pages.dev">M. Nafiurohman</a></span>
+            <div className="flex flex-col gap-1 text-xs text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <BookOpen size={14} />
+                <span>By <a href="https://nafiurohman.pages.dev" className="text-primary hover:underline">M. Nafiurohman</a></span>
+              </div>
+              <div className="text-xs opacity-75">Update Januari 2026</div>
             </div>
           </div>
         )}
+
+        {/* Resize Handle */}
+        {!sidebarCollapsed && (
+          <div
+            ref={resizeRef}
+            className="absolute top-0 right-0 w-1 h-full cursor-col-resize bg-transparent hover:bg-primary/20 transition-colors group"
+            onMouseDown={handleMouseDown}
+          >
+            <div className="w-0.5 h-full bg-border group-hover:bg-primary/50 ml-0.25 transition-colors" />
+          </div>
+        )}
       </aside>
+
+      {/* Spacer for fixed sidebar */}
+      <div 
+        className="hidden lg:block flex-shrink-0 transition-all duration-300"
+        style={{
+          width: sidebarCollapsed ? '64px' : `${sidebarWidth}px`
+        }}
+      />
 
       {/* Mobile Header & Menu */}
       <div className="lg:hidden fixed top-0 left-0 right-0 z-50">
@@ -232,7 +294,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
       </div>
 
       {/* Main Content */}
-      <main className="flex-1 min-h-screen lg:min-h-0">
+      <main className="flex-1 min-h-screen overflow-x-auto">
         {/* Desktop Progress Bar */}
         <div className="hidden lg:block fixed top-0 left-0 right-0 h-1 bg-muted z-30">
           <div
@@ -241,9 +303,11 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
           />
         </div>
         
-        {/* Content with padding for mobile header */}
-        <div className="pt-16 lg:pt-4">
-          {children}
+        {/* Content with responsive padding */}
+        <div className="pt-16 lg:pt-4 px-4 sm:px-6 lg:px-8 max-w-full">
+          <div className="w-full">
+            {children}
+          </div>
         </div>
       </main>
     </div>

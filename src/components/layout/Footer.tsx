@@ -65,7 +65,7 @@ export const Footer: React.FC = () => {
             
             <div className="flex items-center gap-3">
               <a 
-                href="https://github.com/nafiurohman" 
+                href="https://github.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
@@ -73,7 +73,7 @@ export const Footer: React.FC = () => {
                 <Github size={20} />
               </a>
               <a 
-                href="https://instagram.com/nafiurohman_" 
+                href="https://instagram.com/bezn.project" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
@@ -153,7 +153,7 @@ export const Footer: React.FC = () => {
             <p className="flex items-center gap-1 justify-center md:justify-start">
               Made with <Heart size={14} className="text-destructive" /> by{' '}
               <a 
-                href="https://instagram.com/nafiurohman_" 
+                href="https://instagram.com/bezn.project" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-primary hover:underline"

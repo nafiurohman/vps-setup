@@ -61,17 +61,17 @@ export const Header: React.FC<HeaderProps> = ({ onSearch, scrollProgress }) => {
       </div>
 
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-14 sm:h-16">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <button 
             onClick={() => scrollToSection('home')}
             className="flex items-center gap-2 group"
           >
-            <div className="p-1.5 sm:p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-              <Server className="text-primary" size={20} />
+            <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+              <Server className="text-primary" size={24} />
             </div>
-            <span className="font-mono font-bold text-base sm:text-lg hidden xs:block">
-              <span className="text-primary">VPS</span> Setup
+            <span className="font-mono font-bold text-lg hidden sm:block">
+              <span className="text-primary">VPS</span> Setup Guide
             </span>
           </button>
 
@@ -89,16 +89,16 @@ export const Header: React.FC<HeaderProps> = ({ onSearch, scrollProgress }) => {
           </nav>
 
           {/* Search & Actions */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            <form onSubmit={handleSearchSubmit} className="hidden sm:block">
+          <div className="flex items-center gap-3">
+            <form onSubmit={handleSearchSubmit} className="hidden md:block">
               <div className="relative">
                 <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
                 <input
                   type="text"
-                  placeholder="Search..."
+                  placeholder="Search commands..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-32 sm:w-48 lg:w-64 pl-9 pr-4 py-2 text-sm bg-muted border border-border rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                  className="w-48 lg:w-64 pl-9 pr-4 py-2 text-sm bg-muted border border-border rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                 />
               </div>
             </form>
@@ -106,9 +106,9 @@ export const Header: React.FC<HeaderProps> = ({ onSearch, scrollProgress }) => {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors btn-touch"
+              className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors"
             >
-              {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
@@ -123,7 +123,7 @@ export const Header: React.FC<HeaderProps> = ({ onSearch, scrollProgress }) => {
       >
         <div className="container mx-auto px-4 py-4">
           {/* Mobile Search */}
-          <form onSubmit={handleSearchSubmit} className="mb-4 sm:hidden">
+          <form onSubmit={handleSearchSubmit} className="mb-4">
             <div className="relative">
               <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
               <input
@@ -131,18 +131,18 @@ export const Header: React.FC<HeaderProps> = ({ onSearch, scrollProgress }) => {
                 placeholder="Search commands..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-4 py-3 text-sm bg-muted border border-border rounded-lg focus:outline-none focus:border-primary btn-touch"
+                className="w-full pl-9 pr-4 py-2 text-sm bg-muted border border-border rounded-lg focus:outline-none focus:border-primary"
               />
             </div>
           </form>
 
           {/* Mobile Nav Items */}
-          <nav className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <nav className="grid grid-cols-2 gap-2">
             {menuItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="px-4 py-3 text-sm text-left rounded-lg hover:bg-muted transition-colors btn-touch"
+                className="px-4 py-3 text-sm text-left rounded-lg hover:bg-muted transition-colors"
               >
                 {item.label}
               </button>

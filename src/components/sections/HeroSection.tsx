@@ -46,22 +46,22 @@ export const HeroSection: React.FC = () => {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
         {/* Terminal Window */}
-        <div className="max-w-full sm:max-w-2xl mx-auto mb-6 sm:mb-8 terminal animate-fade-up">
+        <div className="max-w-2xl mx-auto mb-8 terminal animate-fade-up">
           <div className="terminal-header">
             <span className="terminal-dot terminal-dot-red" />
             <span className="terminal-dot terminal-dot-yellow" />
             <span className="terminal-dot terminal-dot-green" />
-            <span className="ml-2 sm:ml-4 text-xs text-muted-foreground font-mono">
+            <span className="ml-4 text-xs text-muted-foreground font-mono">
               root@vps ~ 
             </span>
           </div>
-          <div className="p-3 sm:p-6 text-left">
-            <div className="flex items-center gap-2 text-sm sm:text-lg md:text-xl font-mono">
+          <div className="p-6 text-left">
+            <div className="flex items-center gap-2 text-lg md:text-xl font-mono">
               <span className="text-primary">$</span>
               <TypingAnimation
                 text="sudo ./setup-server.sh --production"
                 speed={60}
-                className="text-foreground break-all"
+                className="text-foreground"
               />
             </div>
           </div>
@@ -69,7 +69,7 @@ export const HeroSection: React.FC = () => {
 
         {/* Main Title */}
         <h1 
-          className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-mono font-bold mb-4 sm:mb-6 glitch animate-fade-up px-2"
+          className="text-4xl md:text-6xl lg:text-7xl font-mono font-bold mb-6 glitch animate-fade-up"
           data-text="VPS Setup Guide"
           style={{ animationDelay: '0.2s' }}
         >
@@ -78,31 +78,63 @@ export const HeroSection: React.FC = () => {
 
         {/* Tagline */}
         <p 
-          className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-full sm:max-w-2xl mx-auto mb-6 sm:mb-8 animate-fade-up px-4"
+          className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 animate-fade-up"
           style={{ animationDelay: '0.4s' }}
         >
           Panduan Lengkap Setup VPS dari Nol hingga{' '}
           <span className="text-primary font-semibold">Production-Ready</span>
         </p>
 
+        {/* Stats */}
+        <div 
+          className="flex flex-wrap justify-center gap-8 mb-10 animate-fade-up"
+          style={{ animationDelay: '0.5s' }}
+        >
+          {[
+            { value: '12+', label: 'Setup Steps' },
+            { value: '50+', label: 'Commands' },
+            { value: '24/7', label: 'Access' },
+          ].map((stat, i) => (
+            <div key={i} className="text-center">
+              <div className="text-2xl md:text-3xl font-mono font-bold text-primary neon-text">
+                {stat.value}
+              </div>
+              <div className="text-sm text-muted-foreground">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+
         {/* CTA Buttons */}
         <div 
-          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 animate-fade-up px-4"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up"
           style={{ animationDelay: '0.6s' }}
         >
           <button
             onClick={() => scrollToSection('preparation')}
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-primary text-primary-foreground font-mono font-semibold rounded-lg hover:neon-glow transition-all duration-300 hover:scale-105 btn-touch"
+            className="flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-mono font-semibold rounded-lg hover:neon-glow transition-all duration-300 hover:scale-105"
           >
-            <Terminal size={18} className="sm:size-5" />
-            <span className="text-sm sm:text-base">Mulai Setup</span>
+            <Terminal size={20} />
+            Mulai Setup
           </button>
           <button
             onClick={() => scrollToSection('checklist')}
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 border border-primary/50 text-primary font-mono font-semibold rounded-lg hover:bg-primary/10 transition-all duration-300 hover:scale-105 btn-touch"
+            className="flex items-center gap-2 px-8 py-4 border border-primary/50 text-primary font-mono font-semibold rounded-lg hover:bg-primary/10 transition-all duration-300 hover:scale-105"
           >
-            <CheckSquare size={18} className="sm:size-5" />
-            <span className="text-sm sm:text-base">Lihat Checklist</span>
+            <CheckSquare size={20} />
+            Lihat Checklist
+          </button>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div 
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
+          style={{ animationDelay: '1s' }}
+        >
+          <button
+            onClick={() => scrollToSection('disclaimer')}
+            className="p-2 rounded-full border border-primary/30 hover:border-primary transition-colors"
+          >
+            <ArrowDown size={24} className="text-primary" />
           </button>
         </div>
       </div>

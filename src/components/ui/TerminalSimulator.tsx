@@ -171,36 +171,38 @@ const commandResponses: Record<string, string | ((args: string[]) => string)> = 
   
   'ls': (args) => {
     const paths: Record<string, string> = {
-      '': 'apps  backups  docker  logs  scripts',
-      '-la': `total 32
-drwxr-xr-x  6 vps-setup-by-bezn vps-setup-by-bezn 4096 Jan 15 10:00 .
-drwxr-xr-x  3 root              root              4096 Jan 10 08:00 ..
--rw-------  1 vps-setup-by-bezn vps-setup-by-bezn 1234 Jan 15 09:00 .bash_history
--rw-r--r--  1 vps-setup-by-bezn vps-setup-by-bezn  220 Jan 10 08:00 .bash_logout
--rw-r--r--  1 vps-setup-by-bezn vps-setup-by-bezn 3771 Jan 10 08:00 .bashrc
-drwxr-xr-x  4 vps-setup-by-bezn vps-setup-by-bezn 4096 Jan 15 09:30 apps
-drwxr-xr-x  3 vps-setup-by-bezn vps-setup-by-bezn 4096 Jan 14 02:00 backups
-drwxr-xr-x  4 vps-setup-by-bezn vps-setup-by-bezn 4096 Jan 13 15:00 docker
-drwxr-xr-x  3 vps-setup-by-bezn vps-setup-by-bezn 4096 Jan 15 09:45 logs
-drwxr-xr-x  2 vps-setup-by-bezn vps-setup-by-bezn 4096 Jan 12 11:00 scripts
-drwx------  2 vps-setup-by-bezn vps-setup-by-bezn 4096 Jan 10 08:00 .ssh`,
-      '-l': `drwxr-xr-x  4 vps-setup-by-bezn vps-setup-by-bezn 4096 Jan 15 09:30 apps
-drwxr-xr-x  3 vps-setup-by-bezn vps-setup-by-bezn 4096 Jan 14 02:00 backups
-drwxr-xr-x  4 vps-setup-by-bezn vps-setup-by-bezn 4096 Jan 13 15:00 docker
-drwxr-xr-x  3 vps-setup-by-bezn vps-setup-by-bezn 4096 Jan 15 09:45 logs
-drwxr-xr-x  2 vps-setup-by-bezn vps-setup-by-bezn 4096 Jan 12 11:00 scripts`,
-      '-a': '.  ..  .bash_history  .bash_logout  .bashrc  .ssh  apps  backups  docker  logs  scripts',
+      '': 'apps  backups  docker  logs  scripts  websites',
+      '-la': `total 48
+drwxr-xr-x  7 nafiurohman nafiurohman 4096 Jan 15 10:00 .
+drwxr-xr-x  3 root        root        4096 Jan 10 08:00 ..
+-rw-------  1 nafiurohman nafiurohman 2048 Jan 15 09:00 .bash_history
+-rw-r--r--  1 nafiurohman nafiurohman  220 Jan 10 08:00 .bash_logout
+-rw-r--r--  1 nafiurohman nafiurohman 3771 Jan 10 08:00 .bashrc
+drwxr-xr-x  5 nafiurohman nafiurohman 4096 Jan 15 09:30 apps
+drwxr-xr-x  4 nafiurohman nafiurohman 4096 Jan 14 02:00 backups
+drwxr-xr-x  6 nafiurohman nafiurohman 4096 Jan 13 15:00 docker
+drwxr-xr-x  4 nafiurohman nafiurohman 4096 Jan 15 09:45 logs
+drwxr-xr-x  3 nafiurohman nafiurohman 4096 Jan 12 11:00 scripts
+drwx------  2 nafiurohman nafiurohman 4096 Jan 10 08:00 .ssh
+drwxr-xr-x  8 nafiurohman nafiurohman 4096 Jan 15 10:30 websites`,
+      '-l': `drwxr-xr-x  5 nafiurohman nafiurohman 4096 Jan 15 09:30 apps
+drwxr-xr-x  4 nafiurohman nafiurohman 4096 Jan 14 02:00 backups
+drwxr-xr-x  6 nafiurohman nafiurohman 4096 Jan 13 15:00 docker
+drwxr-xr-x  4 nafiurohman nafiurohman 4096 Jan 15 09:45 logs
+drwxr-xr-x  3 nafiurohman nafiurohman 4096 Jan 12 11:00 scripts
+drwxr-xr-x  8 nafiurohman nafiurohman 4096 Jan 15 10:30 websites`,
+      '-a': '.  ..  .bash_history  .bash_logout  .bashrc  .ssh  .vimrc  apps  backups  docker  logs  scripts  websites',
     };
     return paths[args.join(' ')] || paths[''];
   },
   
-  'pwd': '/home/vps-setup-by-bezn',
+  'pwd': '/home/nafiurohman',
   
-  'whoami': 'vps-setup-by-bezn',
+  'whoami': 'nafiurohman',
   
-  'id': 'uid=1000(vps-setup-by-bezn) gid=1000(vps-setup-by-bezn) groups=1000(vps-setup-by-bezn),27(sudo),998(docker)',
+  'id': 'uid=1000(nafiurohman) gid=1000(nafiurohman) groups=1000(nafiurohman),27(sudo),998(docker),33(www-data)',
   
-  'groups': 'vps-setup-by-bezn sudo docker www-data',
+  'groups': 'nafiurohman sudo docker www-data adm',
   
   'date': () => new Date().toString(),
   
@@ -211,11 +213,11 @@ drwxr-xr-x  2 vps-setup-by-bezn vps-setup-by-bezn 4096 Jan 12 11:00 scripts`,
     return ` ${new Date().toLocaleTimeString()} up ${days} days, ${hours}:${mins.toString().padStart(2, '0')},  1 user,  load average: 0.15, 0.10, 0.05`;
   },
   
-  'hostname': 'vps-server-bezn',
+  'hostname': 'nafiurohman-vps',
   
   'uname': (args) => {
     if (args.includes('-a')) {
-      return 'Linux vps-server-bezn 5.15.0-91-generic #101-Ubuntu SMP Tue Nov 14 13:30:08 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux';
+      return 'Linux nafiurohman-vps 5.15.0-91-generic #101-Ubuntu SMP Tue Nov 14 13:30:08 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux';
     }
     if (args.includes('-r')) {
       return '5.15.0-91-generic';
@@ -236,11 +238,12 @@ PRETTY_NAME="Ubuntu 22.04.3 LTS"
 VERSION_ID="22.04"
 HOME_URL="https://www.ubuntu.com/"
 SUPPORT_URL="https://help.ubuntu.com/"`,
-      '/etc/hostname': 'vps-server-bezn',
+      '/etc/hostname': 'nafiurohman-vps',
       '/etc/passwd': `root:x:0:0:root:/root:/bin/bash
 daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
-vps-setup-by-bezn:x:1000:1000::/home/vps-setup-by-bezn:/bin/bash
-www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin`,
+nafiurohman:x:1000:1000:M. Nafiurohman:/home/nafiurohman:/bin/bash
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+mysql:x:112:117:MySQL Server,,,:/nonexistent:/bin/false`,
       '.bashrc': `# ~/.bashrc: executed by bash for non-login shells.
 # If not running interactively, don't do anything
 case $- in
@@ -261,7 +264,12 @@ HISTFILESIZE=2000`,
 sudo apt update
 docker ps
 systemctl status nginx
-ufw status`,
+ufw status
+git status
+npm run build
+pm2 list
+mysql -u root -p
+curl -I https://nafiurohman.pages.dev`,
     };
     if (args.length === 0) return 'cat: missing operand\nUsage: cat <filename>';
     return files[args[0]] || `cat: ${args[0]}: No such file or directory`;
@@ -1574,8 +1582,8 @@ System clock synchronized: yes
           RTC in local TZ: no`;
   },
   
-  'env': () => `USER=vps-setup-by-bezn
-HOME=/home/vps-setup-by-bezn
+  'env': () => `USER=nafiurohman
+HOME=/home/nafiurohman
 SHELL=/bin/bash
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 LANG=en_US.UTF-8
@@ -1612,6 +1620,164 @@ alias update='sudo apt update && sudo apt upgrade'`;
   },
   
   'ncdu': () => '[Simulated] NCurses Disk Usage - Interactive disk analyzer\nInstall: sudo apt install ncdu\nOfficial: https://dev.yorhel.nl/ncdu',
+  
+  // Additional comprehensive commands
+  'traceroute': (args) => {
+    if (args.length === 0) return 'Usage: traceroute <host>';
+    return `traceroute to ${args[0]} (${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.1), 30 hops max, 60 byte packets
+ 1  gateway (192.168.1.1)  1.234 ms  1.123 ms  1.456 ms
+ 2  10.0.0.1 (10.0.0.1)  5.678 ms  5.432 ms  5.789 ms
+ 3  ${args[0]} (${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.1)  12.345 ms  12.123 ms  12.456 ms`;
+  },
+  
+  'nslookup': (args) => {
+    if (args.length === 0) return 'Usage: nslookup <domain>';
+    return `Server:\t\t8.8.8.8
+Address:\t8.8.8.8#53
+
+Non-authoritative answer:
+Name:\t${args[0]}
+Address: ${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}`;
+  },
+  
+  'dig': (args) => {
+    if (args.length === 0) return 'Usage: dig <domain>';
+    return `; <<>> DiG 9.18.1-1ubuntu1.1-Ubuntu <<>> ${args[0]}
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 12345
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; QUESTION SECTION:
+;${args[0]}.\t\t\tIN\tA
+
+;; ANSWER SECTION:
+${args[0]}.\t300\tIN\tA\t${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}
+
+;; Query time: 23 msec
+;; SERVER: 8.8.8.8#53(8.8.8.8)
+;; WHEN: Mon Jan 15 10:00:00 UTC 2024
+;; MSG SIZE  rcvd: 58`;
+  },
+  
+  'nmap': (args) => {
+    if (args.length === 0) {
+      return `nmap: Network exploration tool and security scanner
+
+Usage: nmap [OPTIONS] <target>
+
+Options:
+  -sS    TCP SYN scan
+  -sU    UDP scan
+  -O     OS detection
+  -A     Aggressive scan
+  -p     Port specification
+
+Examples:
+  nmap 192.168.1.1
+  nmap -sS -O 192.168.1.0/24
+  nmap -p 80,443 example.com
+
+Official docs: https://nmap.org/docs.html`;
+    }
+    return `Starting Nmap 7.80 ( https://nmap.org ) at ${new Date().toLocaleString()} UTC
+Nmap scan report for ${args[args.length-1]}
+Host is up (0.0012s latency).
+Not shown: 996 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+80/tcp   open  http
+443/tcp  open  https
+3306/tcp open  mysql
+
+Nmap done: 1 IP address (1 host up) scanned in 2.34 seconds`;
+  },
+  
+  'screen': (args) => {
+    if (args.length === 0) {
+      return `screen: GNU Screen - Terminal multiplexer
+
+Usage: screen [OPTIONS] [command]
+
+Options:
+  -S <name>     Session name
+  -ls           List sessions
+  -r <name>     Reattach to session
+  -d            Detach session
+
+Examples:
+  screen -S mysession
+  screen -ls
+  screen -r mysession
+
+Official docs: https://www.gnu.org/software/screen/`;
+    }
+    if (args[0] === '-ls') {
+      return `There are screens on:
+\t12345.mysession\t(01/15/2024 09:30:00 AM)\t(Attached)
+\t12346.backup\t(01/15/2024 08:00:00 AM)\t(Detached)
+2 Sockets in /var/run/screen/S-nafiurohman.`;
+    }
+    return `[Simulated] screen: ${args.join(' ')}`;
+  },
+  
+  'tmux': (args) => {
+    if (args.length === 0) {
+      return `tmux: Terminal multiplexer
+
+Usage: tmux [command]
+
+Commands:
+  new-session   Create new session
+  list-sessions List sessions
+  attach        Attach to session
+  detach        Detach from session
+  kill-session  Kill session
+
+Examples:
+  tmux new-session -s mysession
+  tmux list-sessions
+  tmux attach -t mysession
+
+Official docs: https://github.com/tmux/tmux`;
+    }
+    if (args[0] === 'list-sessions' || args[0] === 'ls') {
+      return `mysession: 1 windows (created Mon Jan 15 09:30:00 2024) [80x24] (attached)
+backup: 1 windows (created Mon Jan 15 08:00:00 2024) [80x24]`;
+    }
+    return `[Simulated] tmux: ${args.join(' ')}`;
+  },
+  
+  'w': () => {
+    return ` 10:00:00 up 15 days,  2:30,  2 users,  load average: 0.15, 0.10, 0.05
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+nafiurohman pts/0    192.168.1.100    09:30    0.00s  0.12s  0.01s w
+root     pts/1    192.168.1.101    08:00    1:30m  0.05s  0.05s -bash`;
+  },
+  
+  'jobs': () => {
+    return `[1]+  Running                 nohup python3 app.py &
+[2]-  Stopped                 vim config.txt`;
+  },
+  
+  'file': (args) => {
+    if (args.length === 0) return 'Usage: file <filename>';
+    const filename = args[0];
+    const extensions: Record<string, string> = {
+      '.txt': 'ASCII text',
+      '.py': 'Python script, ASCII text executable',
+      '.js': 'ASCII text',
+      '.sh': 'Bourne-Again shell script, ASCII text executable',
+      '.jpg': 'JPEG image data',
+      '.png': 'PNG image data',
+      '.pdf': 'PDF document',
+      '.zip': 'Zip archive data',
+      '.tar': 'POSIX tar archive',
+      '.gz': 'gzip compressed data'
+    };
+    const ext = Object.keys(extensions).find(e => filename.endsWith(e));
+    return `${filename}: ${ext ? extensions[ext] : 'data'}`;
+  },
   
   'lsof': (args) => {
     if (args.includes('-i')) {
@@ -1778,7 +1944,7 @@ export const TerminalSimulator: React.FC<TerminalSimulatorProps> = ({
           </div>
           <Terminal size={14} className="text-muted-foreground ml-2" />
           <span className="text-xs font-mono text-muted-foreground">
-            vps-setup-by-bezn@vps-server:~
+            nafiurohman@nafiurohman-vps:~
           </span>
         </div>
         
@@ -1828,14 +1994,14 @@ export const TerminalSimulator: React.FC<TerminalSimulatorProps> = ({
         <div className="text-muted-foreground mb-4">
           <div className="text-primary">╔═══════════════════════════════════════════════════════════════════╗</div>
           <div className="text-primary">║                                                                   ║</div>
-          <div className="text-primary">║  <span className="text-secondary font-bold">🖥️  VPS Terminal Simulator</span> - by <span className="text-accent">bezn.project</span>             ║</div>
+          <div className="text-primary">║  <span className="text-secondary font-bold">🖥️  VPS Terminal Simulator</span> - by <span className="text-accent">M. Nafiurohman</span>           ║</div>
           <div className="text-primary">║                                                                   ║</div>
-          <div className="text-primary">║  Praktik command Linux tanpa risiko!                             ║</div>
+          <div className="text-primary">║  Praktik command Linux tanpa risiko! 100+ commands tersedia      ║</div>
           <div className="text-primary">║  Ketik <span className="text-secondary">'help'</span> untuk melihat semua command yang tersedia.         ║</div>
           <div className="text-primary">║                                                                   ║</div>
-          <div className="text-primary">║  📧 Email: bezn.sup@gmail.com                                     ║</div>
-          <div className="text-primary">║  📱 WhatsApp: 085189643588                                        ║</div>
-          <div className="text-primary">║  📸 Instagram: @bezn.project                                      ║</div>
+          <div className="text-primary">║  📧 Email: nafiurohman25@gmail.com                                ║</div>
+          <div className="text-primary">║  📱 WhatsApp: +62-813-5819-8565                                   ║</div>
+          <div className="text-primary">║  🌐 Website: nafiurohman.pages.dev                                ║</div>
           <div className="text-primary">║                                                                   ║</div>
           <div className="text-primary">╚═══════════════════════════════════════════════════════════════════╝</div>
         </div>
@@ -1843,15 +2009,15 @@ export const TerminalSimulator: React.FC<TerminalSimulatorProps> = ({
         {/* Command History */}
         {history.map((item, index) => (
           <div key={index} className="mb-3">
-            <div className="flex items-center gap-2">
-              <span className="text-primary">vps-setup-by-bezn@vps-server</span>
+            <div className="flex items-start gap-2 flex-wrap">
+              <span className="text-primary text-sm">nafiurohman@nafiurohman-vps</span>
               <span className="text-muted-foreground">:</span>
               <span className="text-secondary">~</span>
               <span className="text-muted-foreground">$</span>
-              <span className="text-foreground">{item.command}</span>
+              <span className="text-foreground break-all">{item.command}</span>
             </div>
             <pre className={cn(
-              "whitespace-pre-wrap mt-1 pl-4 text-xs sm:text-sm",
+              "whitespace-pre-wrap mt-1 pl-4 text-xs sm:text-sm overflow-x-auto",
               item.isError ? "text-destructive" : "text-muted-foreground"
             )}>
               {item.output}
@@ -1860,8 +2026,8 @@ export const TerminalSimulator: React.FC<TerminalSimulatorProps> = ({
         ))}
 
         {/* Input Line */}
-        <form onSubmit={handleSubmit} className="flex items-center gap-2">
-          <span className="text-primary">vps-setup-by-bezn@vps-server</span>
+        <form onSubmit={handleSubmit} className="flex items-center gap-2 flex-wrap">
+          <span className="text-primary text-sm">nafiurohman@nafiurohman-vps</span>
           <span className="text-muted-foreground">:</span>
           <span className="text-secondary">~</span>
           <span className="text-muted-foreground">$</span>
@@ -1871,7 +2037,7 @@ export const TerminalSimulator: React.FC<TerminalSimulatorProps> = ({
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="flex-1 bg-transparent outline-none text-foreground"
+            className="flex-1 min-w-0 bg-transparent outline-none text-foreground"
             autoFocus
             autoComplete="off"
             spellCheck={false}

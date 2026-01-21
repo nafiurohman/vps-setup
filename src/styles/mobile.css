@@ -1,0 +1,66 @@
+/* Mobile-First Responsive Overrides */
+
+/* Ensure proper mobile viewport */
+@media screen and (max-width: 767px) {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+  
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    touch-action: manipulation;
+  }
+  
+  /* Prevent horizontal scroll */
+  * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Mobile-optimized scrollbars */
+  ::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+  
+  /* Touch-friendly interactive elements */
+  button, 
+  input, 
+  select, 
+  textarea,
+  [role="button"],
+  [tabindex] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Prevent zoom on input focus */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="search"],
+  textarea,
+  select {
+    font-size: 16px;
+  }
+  
+  /* Mobile-optimized tables */
+  table {
+    font-size: 12px;
+  }
+  
+  /* Better mobile code blocks */
+  pre, code {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+  }
+  
+  /* Mobile-friendly images */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
