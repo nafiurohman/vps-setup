@@ -10,14 +10,14 @@ export const WebServerSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState<typeof webServerTabs[number]>('Nginx');
 
   return (
-    <section id="webserver" className="py-16">
-      <div className="container mx-auto px-4 space-y-8">
+    <section id="webserver" className="section-padding">
+      <div className="container mx-auto px-4 space-y-6 sm:space-y-8">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-mono font-bold mb-4">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-mono font-bold mb-3 sm:mb-4">
             <span className="text-gradient">🌐 Web Server Setup</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-full sm:max-w-2xl mx-auto px-4">
             Setup lengkap web server dengan Nginx/Apache, SSL, PHP, Node.js, dan optimasi performa untuk production.
           </p>
         </div>
@@ -60,22 +60,22 @@ export const WebServerSection: React.FC = () => {
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex justify-center gap-2 mb-8">
+        <div className="flex justify-center gap-1 sm:gap-2 mb-6 sm:mb-8 flex-wrap">
           {webServerTabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={cn(
-                "px-6 py-3 rounded-lg font-mono text-sm transition-all flex items-center gap-2",
+                "px-3 sm:px-6 py-2 sm:py-3 rounded-lg font-mono text-xs sm:text-sm transition-all flex items-center gap-1 sm:gap-2 btn-touch",
                 activeTab === tab
                   ? "bg-primary text-primary-foreground"
                   : "bg-muted hover:bg-muted/80"
               )}
             >
-              {tab === 'Nginx' && <Server size={18} />}
-              {tab === 'Apache' && <Globe size={18} />}
-              {tab === 'Performance' && <Zap size={18} />}
-              {tab}
+              {tab === 'Nginx' && <Server size={14} className="sm:size-4" />}
+              {tab === 'Apache' && <Globe size={14} className="sm:size-4" />}
+              {tab === 'Performance' && <Zap size={14} className="sm:size-4" />}
+              <span className="whitespace-nowrap">{tab}</span>
             </button>
           ))}
         </div>

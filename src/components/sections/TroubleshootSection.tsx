@@ -50,8 +50,13 @@ sudo swapon /swapfile
 
 # Make permanent
 echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab` },
-      { label: 'Optimize applications', code: '# PHP memory limit
-sudo nano /etc/php/8.2/fpm/php.ini\n# memory_limit = 128M\n\n# MySQL memory\nsudo nano /etc/mysql/mysql.conf.d/mysqld.cnf\n# innodb_buffer_pool_size = 512M' },
+      { label: 'Optimize applications', code: `# PHP memory limit
+sudo nano /etc/php/8.2/fpm/php.ini
+# memory_limit = 128M
+
+# MySQL memory
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+# innodb_buffer_pool_size = 512M` },
     ],
   },
   {
@@ -221,37 +226,37 @@ export const TroubleshootSection: React.FC = () => {
         </div>
 
         {/* Search Bar */}
-        <div className="max-w-md mx-auto mb-8">
+        <div className="max-w-full sm:max-w-md mx-auto mb-6 sm:mb-8">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" size={20} />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" size={16} />
             <input
               type="text"
               placeholder="Cari masalah atau solusi..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-primary/50"
+              className="w-full pl-10 pr-4 py-3 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-primary/50 btn-touch text-sm sm:text-base"
             />
           </div>
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex justify-center gap-2 mb-8">
+        <div className="flex justify-center gap-1 sm:gap-2 mb-6 sm:mb-8 flex-wrap">
           {troubleshootTabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={cn(
-                "px-6 py-3 rounded-lg font-mono text-sm transition-all flex items-center gap-2",
+                "px-3 sm:px-6 py-2 sm:py-3 rounded-lg font-mono text-xs sm:text-sm transition-all flex items-center gap-1 sm:gap-2 btn-touch",
                 activeTab === tab
                   ? "bg-primary text-primary-foreground"
                   : "bg-muted hover:bg-muted/80"
               )}
             >
-              {tab === 'Common Issues' && <AlertCircle size={18} />}
-              {tab === 'Performance' && <Wrench size={18} />}
-              {tab === 'Security' && <Shield size={18} />}
-              {tab === 'Monitoring' && <Terminal size={18} />}
-              {tab}
+              {tab === 'Common Issues' && <AlertCircle size={14} className="sm:size-4" />}
+              {tab === 'Performance' && <Wrench size={14} className="sm:size-4" />}
+              {tab === 'Security' && <Shield size={14} className="sm:size-4" />}
+              {tab === 'Monitoring' && <Terminal size={14} className="sm:size-4" />}
+              <span className="whitespace-nowrap">{tab}</span>
             </button>
           ))}
         </div>
@@ -604,7 +609,7 @@ echo ""
 
 echo "=== Service Status ==="
 services=("nginx" "mysql" "php8.2-fpm" "docker" "fail2ban")
-for service in "${services[@]}"; do
+for service in "\${services[@]}"; do
     if systemctl is-active --quiet "$service"; then
         echo "✅ $service: Running"
     else
